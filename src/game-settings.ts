@@ -12,7 +12,7 @@ export default {
         startingRound: 4,
     },
     choices: Object.values(BET_CHOICES),
-    choicesMapper: { player: 1, banker: 2, tie: 3 },
+    choicesMapper: { over: 1, under: 2, odd: 3, even: 4 },
     hedgeBetGroups: [
         ["over", "under"],
         ["odd", "even"],
@@ -22,8 +22,8 @@ export default {
     historyPageSize: 30,
     provablyFair: true,
     botSettings: {
-        ratio: { mainBetOptions: 70, rareBetOptions: 30 },
-        mainBetOptions: ["over", "under"],
-        rareBetOptions: ["odd", "even"],
+        ratio: { overUnderOptions: 50, oddEvenOptions: 50 },
+        overUnderOptions: ["over", "under"],
+        oddEvenOptions: ["odd", "even"],
     },
 };

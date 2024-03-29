@@ -3,6 +3,7 @@ import { bets, rounds, tmpBets, betLogs, results } from "./models/index";
 import { ContainerRegistry } from "sc-number-game-base";
 import { InGameConsumer, RoundResultConsumer } from "./event-consumers";
 import RunningRoundInfoPublisher from "./event-publishers/running-round-info-publisher";
+import { GameStatusPublisher } from "./event-publishers";
 
 export default class NextBallContainerRegistry extends ContainerRegistry {
     registerModels() {
@@ -30,6 +31,7 @@ export default class NextBallContainerRegistry extends ContainerRegistry {
 
         this.container.register({
             runningRoundInfoPublisher: asClass(RunningRoundInfoPublisher).singleton(),
+            gameStatusPublisher: asClass(GameStatusPublisher).singleton(),
         });
     }
 }

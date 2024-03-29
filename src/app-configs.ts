@@ -2,8 +2,8 @@ export default {
     hostingPort: 5002,
     apiSettings: {
         enabledApi: true,
-        apiUrl: "https://api.lumigame.com",
-        authUrl: "https://auth.lumigame.com",
+        apiUrl: "http://gn-game-api-local-service:5000",
+        authUrl: "http://gn-auth-api-local-service:5000",
         client: {
             id: "game-server",
             secret: "gameserver@20luminet&",
@@ -13,14 +13,12 @@ export default {
         placeBetTimeout: 2000,
         enabledApiLogs: true,
     },
-    gameManagementApiSettings: {
-        BASE: "https://l1-proxy.lumigame.com/game-management-service",
-    },
     socketOptions: {
         pingInterval: 60 * 1000,
         pingTimeout: 60 * 1000,
         transports: ["websocket"],
         allowUpgrades: false,
+        perMessageDeflate: false,
     },
     enabledLogs: true,
     database: {
@@ -33,12 +31,12 @@ export default {
         },
     },
     sentry: {
-        sentryUrl: "http://e6e2bdc2d3ab40c682d0d27c1b1f912a@sentry.lumigame.com/13",
-        logIdentifier: "NextBall",
+        sentryUrl: "https://3711f3082699411a8716a3221ca1fd9e@sentry.lumigame.com/89",
+        logIdentifier: "NextBall1",
         env: "LOCAL",
     },
     authenticateSettings: {
-        url: "https://auth.lumigame.com",
+        url: "http://gn-auth-api-local-service:5000",
         id: "game-services",
         secret: "gameservices@20luminet&",
         requestTimeout: 10000,
@@ -49,10 +47,13 @@ export default {
         url: "http://127.0.0.1:5000",
     },
     adminSecretKey: "asWDEerfOIdgsdqRTFabvmgh",
-    enableMsgpackParser: false,
-    otel: {
-        system: "SG",
-        enabled: true,
-        endpoint: "https://jaeger-collector.lumigame.com/v1/traces",
+    metrics: {
+        enable: true,
+        secretKey: "6c1f0f28-70f2-46ae-b031-22624a6cd8df",
     },
+    enableMsgpackParser: false,
+    gameManagementApiSettings: {
+        BASE: "http://gn-game-management-service-local-service:5000",
+    },
+    disableCors: true,
 };

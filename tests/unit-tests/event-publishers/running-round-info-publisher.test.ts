@@ -3,7 +3,7 @@ import RunningRoundInfoPublisher from "../../../src/event-publishers/running-rou
 import { EventPublishers } from "sc-number-game-base";
 import { stub } from "jest-auto-stub";
 
-describe("generateServerSeed", () => {
+describe("running-round-info-publisher test", () => {
     let publisher: RunningRoundInfoPublisher;
     const gameData = stub<GameData>();
 
@@ -19,22 +19,24 @@ describe("generateServerSeed", () => {
         expect(publisher instanceof EventPublishers.RunningRoundInfoPublisher);
     });
 
-    it("should call super.getBetPercentageAndPlayerBetCount", () => {
-        // act
-        publisher.getBetPercentageAndPlayerBetCount();
+    describe("getBetPercentageAndPlayerBetCount", () => {
+        it("should call super.getBetPercentageAndPlayerBetCount", () => {
+            // act
+            publisher.getBetPercentageAndPlayerBetCount();
 
-        // assert
-        expect(EventPublishers.RunningRoundInfoPublisher.prototype.getBetPercentageAndPlayerBetCount).toHaveBeenCalled();
-    });
+            // assert
+            expect(EventPublishers.RunningRoundInfoPublisher.prototype.getBetPercentageAndPlayerBetCount).toHaveBeenCalled();
+        });
 
-    it("should return correct", () => {
-        // act
-        const actual = publisher.getBetPercentageAndPlayerBetCount();
+        it("should return correct", () => {
+            // act
+            const actual = publisher.getBetPercentageAndPlayerBetCount();
 
-        // assert
-        expect(actual).toStrictEqual({
-            betPercentage: { over: 37, under: 37, odd: 12, even: 14 },
-            playerBetCount: { over: 3, under: 3, odd: 1, even: 1 },
+            // assert
+            expect(actual).toStrictEqual({
+                betPercentage: { over: 37, under: 37, odd: 12, even: 14 },
+                playerBetCount: { over: 3, under: 3, odd: 1, even: 1 },
+            });
         });
     });
 });

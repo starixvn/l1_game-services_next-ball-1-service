@@ -13,7 +13,7 @@ jest.mock("sc-number-game-base/dist/helpers", () => ({
     generateRemainingBalls: jest.fn().mockReturnValue([1, 2, 3]),
 }));
 
-describe("generateServerSeed", () => {
+describe("RoundResultConsumer test", () => {
     let consumer: RoundResultConsumer;
     const gameData = stub<GameData>();
     const definition = stub<GameDefinition>();
@@ -24,15 +24,16 @@ describe("generateServerSeed", () => {
         consumer = new RoundResultConsumer(gameData, definition, publisher, null, provablyFairConsumer);
         consumer.gameData.roundResult = [];
     });
+    describe("generateServerSeed", () => {
+        it("should return expected", () => {
+            // arrange
+            const expected = `{"random":"10","remain":"1:2:3","secret":"123asd"}`;
 
-    it("should return expected", () => {
-        // arrange
-        const expected = `{"random":"10","remain":"1:2:3","secret":"123asd"}`;
+            // act
+            const actual = consumer.generateServerSeed();
 
-        // act
-        const actual = consumer.generateServerSeed();
-
-        // assert
-        expect(actual).toEqual(expected);
+            // assert
+            expect(actual).toEqual(expected);
+        });
     });
 });

@@ -22,7 +22,7 @@ export default {
     },
     enabledLogs: true,
     database: {
-        url: "mongodb://lmn_backend:LmnBackend@10.10.50.12:39300,10.10.50.13:39300,10.10.50.14:39300/?replicaSet=GNLocal0&appName=NextBall1",
+        url: "mongodb://lmn_backend:LmnBackend@10.10.50.12:39300,10.10.50.13:39300,10.10.50.14:39300/?replicaSet=GNLocal0&appName=LuckyNext1",
         options: {
             dbName: "minigame",
             useNewUrlParser: true,
@@ -32,7 +32,7 @@ export default {
     },
     sentry: {
         sentryUrl: "https://81e47b9ef0c34ab08c30a8612d9a348e@sentry.lumigame.com/85",
-        logIdentifier: "NextBall1",
+        logIdentifier: "LuckyNext1",
         env: "LOCAL",
     },
     authenticateSettings: {

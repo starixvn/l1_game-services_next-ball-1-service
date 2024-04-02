@@ -24,4 +24,4 @@ const Schema = new mongoose.Schema({
     drawId: { type: Number, default: 0, required: true },
 });
 
-export default mongoose.model("nextball1_betlogs", Schema);
+export default mongoose.model("luckynext1_betlogs", Schema);

@@ -26,7 +26,7 @@ const bet = {
 };
 
 const bets = mongoose.model(
-    "nextball1_bets",
+    "luckynext1_bets",
     new mongoose.Schema({
         ...bet,
         currency: { type: String },
@@ -34,6 +34,6 @@ const bets = mongoose.model(
     })
 );
 
-const tmpBets = mongoose.model("nextball1_tmpbets", new mongoose.Schema(bet));
+const tmpBets = mongoose.model("luckynext1_tmpbets", new mongoose.Schema(bet));
 
 export { bets, tmpBets };

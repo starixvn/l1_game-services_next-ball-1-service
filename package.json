@@ -14,7 +14,7 @@
         "build": "tsc -p tsconfig.build.json",
         "test": "jest --testPathPattern=tests/unit-tests/ ",
         "test-coverage": "jest --collect-coverage --testPathPattern=tests/unit-tests/",
-        "integration-test": "npm run build && jest --testPathPattern=tests/integration-tests/ --detectOpenHandles",
+        "integration-test": "npm run build && jest --testPathPattern=tests/integration-tests/ --detectOpenHandles --forceExit",
         "dev": "tsx watch ./src/app.ts",
         "dev-build": "nodemon --experimental-loader=extensionless --watch ./build ./build/app.js",
         "reg": "npm set registry http://npm.lumigame.com"

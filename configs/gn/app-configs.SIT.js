@@ -51,9 +51,9 @@ export default {
         enable: true,
         secretKey: "6c1f0f28-70f2-46ae-b031-22624a6cd8df",
     },
-    enableMsgpackParser: false,
+    enableMsgpackParser: true,
     gameManagementApiSettings: {
         BASE: "http://gn_game_management_service_sit:5000",
     },
-    disableCors: true,
+    disableCors: false,
 };

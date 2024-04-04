@@ -9,17 +9,17 @@ describe("calculateOddsRange tests", () => {
     it("should call Helpers.getBetOdds", () => {
         // arrange
         const MinProbability = {
-            over: 30 / 67,
-            under: 29 / 67,
-            odd: 30 / 67,
-            even: 29 / 67,
+            over: 31 / 68,
+            under: 30 / 68,
+            odd: 31 / 68,
+            even: 30 / 68,
         };
 
         const MaxProbability = {
-            over: 38 / 67,
-            under: 37 / 67,
-            odd: 38 / 67,
-            even: 37 / 67,
+            over: 38 / 68,
+            under: 37 / 68,
+            odd: 38 / 68,
+            even: 37 / 68,
         };
 
         const margin = [

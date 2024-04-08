@@ -1,23 +1,12 @@
 import { GameClientDriver, normalUser, eventTypes } from "sc-game-service-integration-utils";
-import gameSettings from "./_stubs/game-settings";
-import { startService } from "./_stubs/test-jobs";
-import { getProcessId, buildConfigs, getTimeOutToPlacingBetTime, initUserSession, checkConnect } from "./_stubs/helper";
-import { socketOptionsFunc } from "./_stubs/test-data";
-const path = require("path");
+import gameSettings from "../_stubs/game-settings";
+import {  getTimeOutToPlacingBetTime, initUserSession } from "../helper/helper";
+import { socketOptionsFunc } from "../_stubs/test-data";
+import appConfigs from "../../../build/app-configs.IGT";
 
-const scriptName = path.basename(__filename);
-const processId = getProcessId(scriptName);
-const overrideGameConfigs = { botenabled: false };
-startService(processId, overrideGameConfigs);
-
-const appConfigs = buildConfigs(processId);
 const socketOptions = socketOptionsFunc(appConfigs.hostingPort);
 
 describe("when settle", () => {
-    it("check connect", (done) => {
-        checkConnect(processId, appConfigs, socketOptions, done);
-    });
-
     describe("test data settle", () => {
         let client;
 
@@ -54,6 +43,6 @@ describe("when settle", () => {
             console.log(status);
             // Assert
             expect(status.bet).toBeGreaterThanOrEqual(10);
-        }, 50000);
+        });
     });
 });

@@ -17,7 +17,7 @@ export default Object.assign(appConfigs, {
     database: {
         url: "mongodb://0.0.0.0:27017",
         options: {
-            dbName: "game-service-test-db",
+            dbName: "lucky-next-test-db",
             useNewUrlParser: true,
             useUnifiedTopology: true,
             auto_reconnect: true,

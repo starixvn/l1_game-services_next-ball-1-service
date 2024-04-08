@@ -14,10 +14,9 @@ import {
 
 import { bets, rounds, betLogs, results } from "../../../build/models";
 import { currencyData, game, gameConfig, roundsData, userBetData, promotions as promotionData, userBetLogData, pfResults } from "./test-data";
-import { buildConfigs } from "./helper";
+import appConfigs from "../../../build/app-configs.IGT";
 
-const connectDatabase = async (processId) => {
-    const appConfigs = buildConfigs(processId);
+const connectDatabase = async () => {
     await middlewares.database.configureDatabase(mongoose, appConfigs.database);
 
     await clearAllData();
@@ -31,15 +30,14 @@ const clearAllData = async () => {
     }
 };
 
-export const createTestData = async (processId, overrideGameConfigs) => {
-    const finalGameConfig = Object.assign({}, gameConfig, overrideGameConfigs);
-    await connectDatabase(processId);
+export const createTestData = async () => {
+    await connectDatabase();
     await createExchangeRate();
-    await createGameConfig(finalGameConfig);
+    await createGameConfig(gameConfig);
     const partnerConfig = await createPartnerConfig(game.id);
 
     const currency = await createDummyCurrency(partnerConfig.partnerId, currencyData.code, currencyData.name);
-    await createCurrencyGroupGames(currency.groupId, game.id, finalGameConfig);
+    await createCurrencyGroupGames(currency.groupId, game.id, gameConfig);
     await createDummyUsers(currency);
     await createRounds();
     await createPfResults();
@@ -81,6 +79,4 @@ const createPromotionData = async () => {
     await promotions.insertMany(promotionData);
 };
 
-const processId = process.argv[3];
-const overrideGameConfigs = JSON.parse(process.argv[4]);
-createTestData(processId, overrideGameConfigs);
+createTestData();

@@ -3,12 +3,11 @@ import { Core } from "sc-game-base";
 import { initAPIStub, stubUserService, subGameManagementService } from "sc-game-service-integration-utils";
 import NextBallContainerRegistry from "../../../build/next-ball-container-registry";
 
-import gameSettings from "./game-settings";
+import gameSettings from "../_stubs/game-settings";
 import { resultHelper } from "../../../build/helpers";
-import { buildConfigs } from "./helper";
+import appConfigs from "../../../build/app-configs.IGT";
 
-export const run = async (processId, overrideAppConfigs) => {
-    const appConfigs = Object.assign({}, buildConfigs(processId), overrideAppConfigs);
+export const run = async () => {
     initAPIStub(appConfigs.apiSettings.apiUrl);
     const definition = new GameDefinition(
         gameSettings,
@@ -26,6 +25,4 @@ export const run = async (processId, overrideAppConfigs) => {
     await app.startGame(container);
 };
 
-const processId = process.argv[3];
-const overrideAppConfigs = JSON.parse(process.argv[4]);
-run(processId, overrideAppConfigs);
+run();

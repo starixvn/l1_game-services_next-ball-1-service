@@ -1,42 +1,21 @@
-import fs from "fs";
-import appConfigs from "../../../build/app-configs.IGT";
-import { currencyData, socketOptionsFunc } from "./test-data";
+import { currencyData } from "../_stubs/test-data";
 import { GameClientDriver, normalUser, eventTypes } from "sc-game-service-integration-utils";
-import { GameData, GameDefinition, Helpers } from "sc-number-game-base";
-import gameSettings from "./game-settings";
+import { Helpers } from "sc-number-game-base";
+import gameSettings from "../_stubs/game-settings";
+import mongoose from "mongoose";
+import { middlewares } from "sc-common";
 
-export const checkConnect = (processId, appConfigs, socketOptions, callback) => {
+export const checkConnect = (socketOptions, callback) => {
     const normalUserClientDriver = new GameClientDriver(socketOptions, initUserSession(normalUser));
     normalUserClientDriver.on(eventTypes.connectError, () => {
         setTimeout(() => {
-            checkConnect(processId, appConfigs, socketOptions, callback);
+            checkConnect(socketOptions, callback);
         }, 1000);
     });
     normalUserClientDriver.on(eventTypes.connect, () => {
         normalUserClientDriver.close();
         setTimeout(callback, 2000);
     });
-};
-
-export const getProcessId = (testFileName) => {
-    const filePaths = fs
-        .readdirSync("./tests/integration-tests", { withFileTypes: true })
-        .filter((file) => file.isFile() && file.name.includes(".test."))
-        .map((file) => file.name)
-        .sort();
-
-    const processId = filePaths.indexOf(testFileName) + 1;
-
-    return processId;
-};
-
-export const buildConfigs = (processId) => {
-    const copyConfigs = JSON.parse(JSON.stringify(appConfigs));
-    const gameName = gameSettings.name.toLowerCase();
-    copyConfigs.database.options.dbName = `${gameName}-test-db-${processId}`;
-    copyConfigs.hostingPort = 5000 + parseInt(processId);
-
-    return copyConfigs;
 };
 
 export const getTimeOutToPlacingBetTime = (remainingTime, durations) => {
@@ -79,3 +58,4 @@ export const initUserSession = (user) => {
         browserUserAgent: "browser-user-agent",
     };
 };
+

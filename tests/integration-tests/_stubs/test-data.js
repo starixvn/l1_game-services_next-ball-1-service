@@ -36,7 +36,7 @@ const gameConfig = {
             tie: 0.2,
         },
     ],
-    botenabled: true,
+    botenabled: false,
     hour_maxbot: [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
     bot_maxbet: 1000,
     choices_maxbet: { player: 3000, banker: 3000, tie: 3000 },

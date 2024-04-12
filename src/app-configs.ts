@@ -19,6 +19,8 @@ export default {
         transports: ["websocket"],
         allowUpgrades: false,
         perMessageDeflate: false,
+        maxRequestsPerInterval: 100, // default 1000
+        rateLimitInterval: 10 * 1000, // default 10 * 1000
     },
     enabledLogs: true,
     database: {

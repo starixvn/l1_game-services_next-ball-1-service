@@ -40,7 +40,6 @@ describe("when settle", () => {
             const result = await client.handleGameEvent((data) => data.status);
             const { status } = result;
 
-            console.log(status);
             // Assert
             expect(status.bet).toBeGreaterThanOrEqual(10);
         });

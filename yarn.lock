@@ -7116,10 +7116,10 @@ sc-instrument@1.1.1-beta.2:
     opentelemetry-instrumentation-socket.io "0.34.0"
     socket.io "4.6.1"
 
-sc-number-game-base@1.0.0-beta.92:
-  version "1.0.0-beta.92"
-  resolved "http://npm.lumigame.com/sc-number-game-base/-/sc-number-game-base-1.0.0-beta.92.tgz#63ddbde181cb4b1ccab848f6f730970b0287f550"
-  integrity sha512-Ct2BQ/1jBfrOrY/S3jNPh1BbOmPQpa2PIBPS4s5Niu6h1v2nTqD0ely3egMZ9SAX3a/1Km+fYQ8XE6itE2Yoqg==
+sc-number-game-base@1.0.1-beta.0:
+  version "1.0.1-beta.0"
+  resolved "http://npm.lumigame.com/sc-number-game-base/-/sc-number-game-base-1.0.1-beta.0.tgz#25219e953bd65bed5e01f033e93c46dcb18cc94d"
+  integrity sha512-iEqw9yXyZob3nu9tjVQ0QcFTZQyC9Or+lE7FrbKIqmBMvvuosIuXHiQ8bw/EHkU8h1SlyC/PKO/lEDPB3wU8hw==
   dependencies:
     awilix "^8.0.0"
     chance "1.1.6"

@@ -10,7 +10,6 @@ export type FinishDraw = {
     drawId: number;
     time: Date;
     isLastDraw: boolean;
-    realPlayers: any
 };
 
 export class SettleGameRoundConsumer extends Table.EventConsumers.TableSettleGameRoundConsumer {
@@ -56,7 +55,7 @@ export class SettleGameRoundConsumer extends Table.EventConsumers.TableSettleGam
                 drawId: roundSettled.drawId,
                 time: drawResult.time,
                 isLastDraw: roundSettled.ended,
-                realPlayers: this.gameData.realPlayers
+
             };
             this.roundResultPublisher.publishRoundResult(finishDraw);
             this.updateRoundData(finishDraw, roundSettled.result);

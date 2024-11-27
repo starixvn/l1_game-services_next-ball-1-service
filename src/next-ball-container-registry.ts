@@ -24,7 +24,7 @@ export default class NextBallContainerRegistry extends ContainerRegistry {
         super.registerConsumers();
         this.container.register({
             inGameConsumer: asClass(InGameConsumer).singleton(),
-            settleGameRoundConsumer: asClass(SettleGameRoundConsumer).singleton().proxy(),
+            // settleGameRoundConsumer: asClass(SettleGameRoundConsumer).singleton().proxy(),
             roundResultConsumer: asClass(RoundResultConsumer).singleton(),
         });
     }
@@ -35,7 +35,7 @@ export default class NextBallContainerRegistry extends ContainerRegistry {
         this.container.register({
             runningRoundInfoPublisher: asClass(RunningRoundInfoPublisher).singleton(),
             gameStatusPublisher: asClass(GameStatusPublisher).singleton(),
-            // roundResultPublisher: asClass(RoundResultPublisher).singleton(),
+            roundResultPublisher: asClass(RoundResultPublisher).singleton(),
         });
     }
 }

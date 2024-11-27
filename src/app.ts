@@ -20,6 +20,10 @@ const run = async () => {
 
     const app = new Core.BaseGameApp(gameSettings.name, appConfigs);
 
+    // app.socketServer.on("custom_ping", (timestamp) => {
+    //     app.socketServer.emit("custom_pong", timestamp);
+    // });
+
     await app.run();
 
     await app.startGame(container);

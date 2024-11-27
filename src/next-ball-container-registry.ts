@@ -4,6 +4,8 @@ import { ContainerRegistry } from "sc-number-game-base";
 import { InGameConsumer, RoundResultConsumer } from "./event-consumers";
 import RunningRoundInfoPublisher from "./event-publishers/running-round-info-publisher";
 import { GameStatusPublisher } from "./event-publishers";
+import { SettleGameRoundConsumer } from "./event-consumers/settle-game-round-consumer";
+import RoundResultPublisher from "./event-publishers/round-result-pulisher";
 
 export default class NextBallContainerRegistry extends ContainerRegistry {
     registerModels() {
@@ -23,6 +25,7 @@ export default class NextBallContainerRegistry extends ContainerRegistry {
         this.container.register({
             inGameConsumer: asClass(InGameConsumer).singleton(),
             roundResultConsumer: asClass(RoundResultConsumer).singleton(),
+            settleGameRoundConsumer: asClass(SettleGameRoundConsumer).singleton().proxy(),
         });
     }
 
@@ -32,6 +35,7 @@ export default class NextBallContainerRegistry extends ContainerRegistry {
         this.container.register({
             runningRoundInfoPublisher: asClass(RunningRoundInfoPublisher).singleton(),
             gameStatusPublisher: asClass(GameStatusPublisher).singleton(),
+            // roundResultPublisher: asClass(RoundResultPublisher).singleton(),
         });
     }
 }

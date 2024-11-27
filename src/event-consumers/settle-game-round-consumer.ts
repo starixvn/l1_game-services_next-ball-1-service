@@ -1,18 +1,9 @@
-import { Table } from "sc-game-base";
-import { GameData, GameDefinition } from "sc-number-game-base";
-import { RoundResultPublisher } from "sc-number-game-base/dist/event-publishers";
-import { getFilterObjectWithAllowedKeys } from "sc-number-game-base/dist/helpers";
 
-export type FinishDraw = {
-    result: any;
-    settlementResult: any;
-    roundId: number;
-    drawId: number;
-    time: Date;
-    isLastDraw: boolean;
-};
+import { EventConsumers, GameData, GameDefinition } from "sc-number-game-base";
+import RoundResultPublisher from "../event-publishers/round-result-pulisher";
+import { FinishDraw } from "sc-number-game-base/dist/event-consumers/settle-game-round-consumer";
 
-export class SettleGameRoundConsumer extends Table.EventConsumers.TableSettleGameRoundConsumer {
+export class SettleGameRoundConsumer extends EventConsumers.SettleGameRoundConsumer {
     declare gameData: GameData;
     declare definition: GameDefinition;
     declare roundResultPublisher: RoundResultPublisher;
@@ -57,58 +48,10 @@ export class SettleGameRoundConsumer extends Table.EventConsumers.TableSettleGam
                 isLastDraw: roundSettled.ended,
 
             };
-            this.roundResultPublisher.publishRoundResult(finishDraw);
+            this.roundResultPublisher.publishRoundResult(finishDraw, this.gameData);
             this.updateRoundData(finishDraw, roundSettled.result);
             await this.settleBets(finishDraw);
             this.roundResultPublisher.publishWinners(roundId, this.gameData.winningPlayers, drawId);
         }
-    }
-
-    isFirstDrawOfRound(drawId: number): boolean {
-        return drawId % this.definition.numberOfTurnsPerRound === 1;
-    }
-
-    async queryBets(drawId: number) {
-        const realPlayerBets = await this.betsRepository.find({ drawId: drawId }).exec();
-        const botBets = await this.tempBetsRepository.find({ drawId: drawId }).exec();
-
-        return realPlayerBets.concat(botBets);
-    }
-
-    async settleBets(finishDraw: FinishDraw) {
-        const bets = await this.queryBets(finishDraw.drawId);
-
-        if (bets?.length) {
-            await Promise.all(
-                bets.map(async (bet: any) => {
-                    const settlementDrawResult = getFilterObjectWithAllowedKeys(finishDraw.settlementResult, this.definition.choices);
-
-                    const betResult = this.calculateBetResult(settlementDrawResult, bet, bet.odds);
-
-                    bet.betwin = betResult.totalWin;
-                    bet.paid = true;
-
-                    await bet.save();
-                    await this.callEndGame(bet, finishDraw.drawId, finishDraw.time, betResult);
-
-                    this.captureBetResult(bet.uid, betResult, bet.rate);
-                    await this.userBetResultPublisher.publish(bet.uid, betResult);
-                })
-            );
-        }
-    }
-
-    isLastDrawOfRound(drawId: number): boolean {
-        return drawId % this.definition.numberOfTurnsPerRound === 0;
-    }
-
-    updateRoundData(finishDraw: FinishDraw, roundResult: any) {
-        this.gameData.drawId = finishDraw.drawId + 1;
-
-        if (this.isLastDrawOfRound(finishDraw.drawId)) {
-            this.gameData.roundId = finishDraw.roundId + 1;
-        }
-
-        this.gameData.roundResult = roundResult;
     }
 }

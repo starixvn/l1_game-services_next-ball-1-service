@@ -24,7 +24,7 @@ export default class NextBallContainerRegistry extends ContainerRegistry {
         super.registerConsumers();
         this.container.register({
             inGameConsumer: asClass(InGameConsumer).singleton(),
-            // settleGameRoundConsumer: asClass(SettleGameRoundConsumer).singleton().proxy(),
+            settleGameRoundConsumer: asClass(SettleGameRoundConsumer).singleton().proxy(),
             roundResultConsumer: asClass(RoundResultConsumer).singleton(),
         });
     }

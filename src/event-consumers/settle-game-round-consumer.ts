@@ -8,7 +8,7 @@ export class SettleGameRoundConsumer extends EventConsumers.SettleGameRoundConsu
     declare definition: GameDefinition;
     declare roundResultPublisher: RoundResultPublisher;
 
-    async settleRound() {
+    override async settleRound() {
         let roundSettled: any;
         const drawResult = this.gameData.result;
         const drawSettlementResult = this.definition.settle(drawResult);
@@ -48,7 +48,7 @@ export class SettleGameRoundConsumer extends EventConsumers.SettleGameRoundConsu
                 isLastDraw: roundSettled.ended,
 
             };
-            this.roundResultPublisher.publishRoundResult(finishDraw, this.gameData);
+            this.roundResultPublisher.publishRoundResult(finishDraw);
             this.updateRoundData(finishDraw, roundSettled.result);
             await this.settleBets(finishDraw);
             this.roundResultPublisher.publishWinners(roundId, this.gameData.winningPlayers, drawId);

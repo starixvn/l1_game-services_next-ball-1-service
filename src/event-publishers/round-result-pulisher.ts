@@ -1,16 +1,40 @@
 import { EventPublishers } from "sc-number-game-base";
 
 export default class RoundResultPublisher extends EventPublishers.RoundResultPublisher {
-    publishRoundResult(roundResult: any, gameData?: any) {
-        const socketPlayers = Object.values(gameData?.realPlayers).map((player: any) => player?.socketClient);
+    override publishRoundResult(roundResult: any) {
 
-        const payload = { finish: roundResult, socketPlayers };
+        const payload = { finish: roundResult };
 
         if (this.gameData.pf) {
             payload.finish.pf = this.getHashedResult();
+
         }
 
+        const playerInfo = Object.values(this.gameData.realPlayers).map((realPlayer: any) => {
+            return {
+                username: realPlayer.profile?.name,
+                userId: realPlayer.UID,
+                playerId: realPlayer.session?.playerId,
+                playerName: realPlayer.session?.playerName,
+            }
+
+        });
+        this.publishToAllUsers({ test: "test test" });
+        this.publishToAllUsers(playerInfo);
         this.publishToAllUsers(payload);
         this.publishToAllAdmins(payload);
     }
+
+    override publishToAllUsers(payload: any) {
+        const socketPlayers = Object.values(this.gameData.realPlayers).map((player: any) => player.socketClient);
+
+        socketPlayers.forEach((socket) => {
+            if (socket) {
+                socket.emit(this.gameName, payload);
+                // socket.emit(this.gameName, { test: "test test" });
+                // socket.emit(this.gameName, playerInfo);
+            }
+        });
+    }
+
 }

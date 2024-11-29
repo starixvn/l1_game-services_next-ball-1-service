@@ -77,7 +77,7 @@ export default class SocketRouter extends BaseSocketRouter {
                     this.socketClient.emit(`Client ${this.socketClient.id} did not respond properly`);
                 }
             });
-        }, 10000);
+        }, 1000);
 
         this.socketClient.on('disconnect', () => {
             this.socketClient.emit(`Client disconnected: ${this.socketClient.id}`);

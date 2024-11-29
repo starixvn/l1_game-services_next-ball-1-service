@@ -31,9 +31,9 @@ export default class RoundResultPublisher extends EventPublishers.RoundResultPub
 
         socketPlayers.forEach((socket) => {
             if (socket) {
-                const playerSocketId = this.gameData.realPlayers[socket.id];
+                // const playerSocketId = this.gameData.realPlayers[socket.id];
                 socket.emit(this.gameName, payload);
-                socket.emit(this.gameName, { playerSocketId, socketIds });
+                socket.emit(this.gameName, { socketIds });
             }
         });
     }

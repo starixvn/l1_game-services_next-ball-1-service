@@ -67,26 +67,21 @@ export default class SocketRouter extends BaseSocketRouter {
     init(socketClient: Socket<DefaultEventsMap, DefaultEventsMap, DefaultEventsMap, any>): void {
         super.init(socketClient);
 
-
         this.socketClient.on("custom_ping", (timestamp) => {
             this.socketClient.emit("custom_pong", timestamp);
         });
 
-        this.socketClient.on('connection', (socket) => {
-            console.log(`Client connected: ${socket.id}`);
-
-            const healthCheckInterval = setInterval(() => {
-                socket.emit('health-check', 'Are you alive?', (response: any) => {
-                    if (response !== 'yes') {
-                        socket.emit(`Client ${socket.id} did not respond properly`);
-                    }
-                });
-            }, 10000);
-
-            socket.on('disconnect', () => {
-                socket.emit(`Client disconnected: ${socket.id}`);
-                clearInterval(healthCheckInterval);
+        const healthCheckInterval = setInterval(() => {
+            this.socketClient.emit('health-check', 'Are you alive?', (response: any) => {
+                if (response !== 'yes') {
+                    this.socketClient.emit(`Client ${this.socketClient.id} did not respond properly`);
+                }
             });
+        }, 10000);
+
+        this.socketClient.on('disconnect', () => {
+            this.socketClient.emit(`Client disconnected: ${this.socketClient.id}`);
+            clearInterval(healthCheckInterval);
         });
     }
 }

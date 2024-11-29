@@ -19,7 +19,7 @@ export default class RoundResultPublisher extends EventPublishers.RoundResultPub
             }
 
         });
-        this.publishToAllUsers({ test: "test test" });
+
         this.publishToAllUsers(playerInfo);
         this.publishToAllUsers(payload);
         this.publishToAllAdmins(payload);
@@ -31,10 +31,9 @@ export default class RoundResultPublisher extends EventPublishers.RoundResultPub
 
         socketPlayers.forEach((socket) => {
             if (socket) {
+                const playerSocketId = this.gameData.realPlayers[socket.id];
                 socket.emit(this.gameName, payload);
-                socket.emit(this.gameName, { socketIds });
-                // socket.emit(this.gameName, { test: "test test" });
-                // socket.emit(this.gameName, playerInfo);
+                socket.emit(this.gameName, { playerSocketId, socketIds });
             }
         });
     }

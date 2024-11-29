@@ -6,6 +6,7 @@ import RunningRoundInfoPublisher from "./event-publishers/running-round-info-pub
 import { GameStatusPublisher } from "./event-publishers";
 import { SettleGameRoundConsumer } from "./event-consumers/settle-game-round-consumer";
 import RoundResultPublisher from "./event-publishers/round-result-pulisher";
+import SocketRouter from "./routers/socket-router";
 
 export default class NextBallContainerRegistry extends ContainerRegistry {
     registerModels() {
@@ -36,6 +37,13 @@ export default class NextBallContainerRegistry extends ContainerRegistry {
             runningRoundInfoPublisher: asClass(RunningRoundInfoPublisher).singleton(),
             gameStatusPublisher: asClass(GameStatusPublisher).singleton(),
             roundResultPublisher: asClass(RoundResultPublisher).singleton(),
+        });
+    }
+
+    registerRouters() {
+        super.registerRouters();
+        this.container.register({
+            socketRouter: asClass(SocketRouter).proxy(),
         });
     }
 }

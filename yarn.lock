@@ -2354,6 +2354,11 @@
   resolved "http://npm.lumigame.com/@types/range-parser/-/range-parser-1.2.7.tgz#50ae4353eaaddc04044279812f52c8c65857dbcb"
   integrity sha512-hKormJbkJqzQGhziax5PItDUTMAM9uE2XXQmM37dyd4hVM+5aVl7oVxMVUiVQn2oCQFN/LKCZdvSM0pFRqbSmQ==
 
+"@types/sc-common@^1.0.0-beta.0":
+  version "1.0.0"
+  resolved "http://npm.lumigame.com/@types/sc-common/-/sc-common-1.0.0.tgz#03834ca1a7eaf102a983b659d9ea506462f73584"
+  integrity sha512-gD03QcJr+AnDv4rPd76TNl14RP3bUA1s6qLaQcSM5tSLHmwPD8oFyxxGaRhUsbWf0YrQVdogj8aCWq1tqRd8fw==
+
 "@types/sc-game-base@^1.0.0-beta.0":
   version "1.0.0-beta.0"
   resolved "http://npm.lumigame.com/@types/sc-game-base/-/sc-game-base-1.0.0-beta.0.tgz#00b1173f427dd76b7f9ee4303342d4a765a28b4b"
@@ -7004,7 +7009,7 @@ sc-base-database@2.2.0, sc-base-database@^2.2.0:
     mongoose "^5.9.25"
     sc-common "1.8.1"
 
-sc-common@1.8.1:
+sc-common@1.8.1, sc-common@^1.8.1:
   version "1.8.1"
   resolved "http://npm.lumigame.com/sc-common/-/sc-common-1.8.1.tgz#c79e6131011b541baab8d775ff53b3b081ff8221"
   integrity sha512-78bocqv9txbr8jyi83CjANBpLN+ZFcyvRQVQJvsBU+8ZNnqibx9m5p/yUMPNX1miMyi53+4ELQtB5kmr689Q5Q==

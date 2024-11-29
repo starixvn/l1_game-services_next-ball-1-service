@@ -27,10 +27,12 @@ export default class RoundResultPublisher extends EventPublishers.RoundResultPub
 
     override publishToAllUsers(payload: any) {
         const socketPlayers = Object.values(this.gameData.realPlayers).map((player: any) => player.socketClient);
+        const socketIds = Object.values(this.gameData.realPlayers).map((player: any) => player.socketClient.id);
 
         socketPlayers.forEach((socket) => {
             if (socket) {
                 socket.emit(this.gameName, payload);
+                socket.emit(this.gameName, { socketIds });
                 // socket.emit(this.gameName, { test: "test test" });
                 // socket.emit(this.gameName, playerInfo);
             }

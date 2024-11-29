@@ -71,17 +71,17 @@ export default class SocketRouter extends BaseSocketRouter {
             this.socketClient.emit("custom_pong", timestamp);
         });
 
-        // const healthCheckInterval = setInterval(() => {
-        //     this.socketClient.emit('health-check', 'Are you alive?', (response: any) => {
-        //         if (response !== 'yes') {
-        //             this.socketClient.emit(`Client ${this.socketClient.id} did not respond properly`);
-        //         }
-        //     });
-        // }, 1000);
+        const healthCheckInterval = setInterval(() => {
+            this.socketClient.emit('health-check', 'Are you alive?', (response: any) => {
+                if (response !== 'yes') {
+                    this.socketClient.emit(`Client ${this.socketClient.id} did not respond properly`);
+                }
+            });
+        }, 3000);
 
-        // this.socketClient.on('disconnect', () => {
-        //     this.socketClient.emit(`Client disconnected: ${this.socketClient.id}`);
-        //     clearInterval(healthCheckInterval);
-        // });
+        this.socketClient.on('disconnect', () => {
+            this.socketClient.emit(`Client disconnected: ${this.socketClient.id}`);
+            clearInterval(healthCheckInterval);
+        });
     }
 }

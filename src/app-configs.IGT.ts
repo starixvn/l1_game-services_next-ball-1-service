@@ -20,7 +20,6 @@ export default Object.assign(appConfigs, {
             dbName: "lucky-next-test-db",
             useNewUrlParser: true,
             useUnifiedTopology: true,
-            auto_reconnect: true,
         },
     },
     enabledBoostedOdds: false,

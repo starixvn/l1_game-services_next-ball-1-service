@@ -5,6 +5,7 @@ const modelName = "luckynext1_rounds";
 export type DrawResult = {
     drawId: number;
     ball: number;
+    time: Date;
 };
 
 const resultSchema = new mongoose.Schema<DrawResult>(
